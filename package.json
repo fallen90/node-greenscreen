@@ -1,0 +1,13 @@
+{
+  "name": "node-greenscreen",
+  "version": "1.0.0",
+  "description": "GreenScreen image manipulation system",
+  "keywords": [],
+  "author": "fallen90",
+  "license": "MIT",
+  "dependencies": {
+    "easyimage": "^2.1.0",
+    "images": "^2.1.11",
+    "pngjs": "^2.2.0"
+  }
+}
