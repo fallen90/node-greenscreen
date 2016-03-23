@@ -7,7 +7,6 @@ exports.create = function(inf, outf, success, failed) {
     if (typeof outf == 'undefined') {
         outf = 'output/' + path.basename(inf, path.extname(inf)) + '.out.png';
     }
-    // if (path.extname(inf).toLowerCase() == 'jpg' || path.extname(inf).toLowerCase() == 'jpeg') {
         easyimg.convert({
             src: inf,
             dst: ".tmp/" + path.basename(inf, path.extname(inf)) + '.png'
@@ -17,9 +16,6 @@ exports.create = function(inf, outf, success, failed) {
             console.error('error converting image', err, inf, outf);
             failed(err, inf, outf);
         });
-    // } else {
-    //     processFile(inf, outf, success, failed);
-    // }
 };
 
 var processFile = function(inf, outf, success, failed) {
