@@ -7,7 +7,21 @@
   "license": "MIT",
   "dependencies": {
     "easyimage": "^2.1.0",
+    "express": "^4.13.4",
     "images": "^2.1.11",
     "pngjs": "^2.2.0"
-  }
+  },
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fallen90/node-greenscreen.git"
+  },
+  "bugs": {
+    "url": "https://github.com/fallen90/node-greenscreen/issues"
+  },
+  "homepage": "https://github.com/fallen90/node-greenscreen#readme"
 }
