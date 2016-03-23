@@ -10,12 +10,13 @@ var inter = orig + "_inter.png";
 var inter2 = orig + "_inter2.png";
 var output = orig + "_output.png";
 
-var command1 = "bash -c \"composite -geometry 300x250+350+510 " + butas + " bg.png " + inter + "\"";
-var command1_2 = "composite lightleak.png " + butas + " " + inter2 + " " + inter;
+var command1 = "composite -geometry 300x250+350+510 " + butas + " bg.png " + inter ;
+var command1_2 = "composite warm1.png " + inter + " " + inter2;
 
-var command2 = "composite fg.png " + inter + " " + output;
+var command2 = "composite fg.png " + inter2 + " " + output;
 var command3 = "bash -c \"rm " + butas + "\"";
 var command4 = "bash -c \"rm  " + inter + "\"";
+var command5 = "bash -c \"rm  " + inter2 + "\"";
 
 
 function command2func(error, stdout, stderr)
@@ -32,12 +33,12 @@ function command12func(error, stdout, stderr)
 function command3func(error, stdout, stderr)
 {
     console.log( 'COMMAND ', command3, '  ERROR:', error );
-    exec(command3, commandDelete);
-}
-function commandDelete(error, stdout, stderr)
-{
+    exec(command3, puts);
     exec(command4, puts);
+    exec(command5, puts);
+
 }
+
 
 chromakey.create(src, butas, function(file){
    
@@ -45,7 +46,7 @@ chromakey.create(src, butas, function(file){
   console.log( 'COMMAND 1', command1 );
 
     setTimeout( function() {
-        exec( command1, command2func);
+        exec( command1, command12func);
     } ,500);
   
 }, function(err){
