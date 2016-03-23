@@ -2,15 +2,23 @@ var fs = require('fs'),
     PNG = require('pngjs').PNG,
     easyimg = require('easyimage');
 
+var exec = require('child_process').exec;
+
+var orig = process.argv[3];
+var src = orig + ".jpg";
+var converted = orig + ".png"; 
+
 easyimg.convert({
     src : process.argv[2],
     dst : 'in2.png'
 }).then(function(file){
-    mainOperation(file.path, 'out.png');
+    mainOperation(file.path, process.argv[3]);
 }, function(err){
     console.log('error convert', err);
 })
 
+
+function puts(error, stdout, stderr) { sys.puts(stdout) }
 
 function mainOperation(inf, outf) {
     fs.createReadStream(inf)
@@ -76,3 +84,10 @@ function operate(pixel, alphaMap) {
 
     return pixel;
 }
+/*
+image magic commands
+
+composite -geometry 300x250+370+510 butas.png bg.png intermediate.png
+composite fg.png intermediate.png output.png
+
+*/
