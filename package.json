@@ -6,6 +6,7 @@
   "author": "fallen90",
   "license": "MIT",
   "dependencies": {
+    "connect-busboy": "0.0.2",
     "easyimage": "^2.1.0",
     "express": "^4.13.4",
     "images": "^2.1.11",

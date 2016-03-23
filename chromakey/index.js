@@ -3,7 +3,7 @@ var fs = require('fs'),
     easyimg = require('easyimage'),
     path = require('path');
 
-exports.create = function(inf, outf) {
+exports.create = function(inf, outf, success, failed) {
     if (typeof outf == 'undefined') {
         outf = 'output/' + path.basename(inf, path.extname(inf)) + '.out.png';
     }
@@ -12,16 +12,17 @@ exports.create = function(inf, outf) {
             src: inf,
             dst: ".tmp/" + path.basename(inf, path.extname(inf)) + '.png'
         }).then(function(file) {
-            processFile(file.path, outf);
+            processFile(file.path, outf, success, failed);
         }, function(err) {
             console.error('error converting image', err, inf, outf);
+            failed(err, inf, outf);
         });
     } else {
-        processFile(inf, outf);
+        processFile(inf, outf, success, failed);
     }
 };
 
-var processFile = function(inf, outf) {
+var processFile = function(inf, outf, success, failed) {
     fs.createReadStream(inf)
         .pipe(new PNG({
             filterType: 4
@@ -47,10 +48,10 @@ var processFile = function(inf, outf) {
                 }
             }
             this.pack().pipe(fs.createWriteStream(outf));
-            return {
-                out_file: outf,
-                in_file: inf
-            }
+            success(outf);
+        }, function(err){
+            console.log('failed to parsed stream', err, "outf",outf,"inf", inf);
+            failed(err);
         });
 };
 
