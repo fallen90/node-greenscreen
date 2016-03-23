@@ -10,7 +10,7 @@ var inter = orig + "_inter.png";
 var inter2 = orig + "_inter2.png";
 var output = orig + "_output.png";
 
-var command1 = "composite -geometry 300x250+350+510 " + butas + " bg.png " + inter ;
+var command1 = "composite -geometry 720x540+180+400 " + butas + " bg.png " + inter ;
 var command1_2 = "composite warm1.png " + inter + " " + inter2;
 
 var command2 = "composite fg.png " + inter2 + " " + output;
