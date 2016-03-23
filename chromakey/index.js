@@ -7,7 +7,7 @@ exports.create = function(inf, outf, success, failed) {
     if (typeof outf == 'undefined') {
         outf = 'output/' + path.basename(inf, path.extname(inf)) + '.out.png';
     }
-    if (path.extname(inf).toLowerCase() == 'jpg' || path.extname(inf).toLowerCase() == 'jpeg') {
+    // if (path.extname(inf).toLowerCase() == 'jpg' || path.extname(inf).toLowerCase() == 'jpeg') {
         easyimg.convert({
             src: inf,
             dst: ".tmp/" + path.basename(inf, path.extname(inf)) + '.png'
@@ -17,9 +17,9 @@ exports.create = function(inf, outf, success, failed) {
             console.error('error converting image', err, inf, outf);
             failed(err, inf, outf);
         });
-    } else {
-        processFile(inf, outf, success, failed);
-    }
+    // } else {
+    //     processFile(inf, outf, success, failed);
+    // }
 };
 
 var processFile = function(inf, outf, success, failed) {
@@ -58,7 +58,7 @@ var processFile = function(inf, outf, success, failed) {
 var initialAlphaMap = function() {
     var alphaMapArray = [];
     var fullyTransparentEndIndex = 35;
-    var semiTransparentEndIndex = 10;
+    var semiTransparentEndIndex = 90;
     for (var i = 0; i < 510; i++) {
         if (i < fullyTransparentEndIndex) {
             alphaMapArray.push(255);
