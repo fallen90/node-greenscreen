@@ -9,7 +9,11 @@
     "connect-busboy": "0.0.2",
     "easyimage": "^2.1.0",
     "express": "^4.13.4",
+    "google-auth-library": "^0.9.7",
+    "googleapis": "^3.1.0",
+    "imagemagick-composite": "^0.1.2",
     "images": "^2.1.11",
+    "lowdb": "^0.12.5",
     "pngjs": "^2.2.0"
   },
   "main": "index.js",
