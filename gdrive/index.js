@@ -15,8 +15,8 @@ var CLIENTSECRET_PATH = __dirname + "/client_secret.json";
 
 
 // Load client secrets from a local file.
-var srcFolder = __dirname + "/../imgs/";
-// var srcFolder = __dirname + "/../public/outputs/";
+// var srcFolder = __dirname + "/../imgs/";
+var srcFolder = __dirname + "/../public/outputs/";
 
 exports.uploadFile = function(filename, destFile, folderId, success, failed) {
 
