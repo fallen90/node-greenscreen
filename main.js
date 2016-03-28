@@ -1,78 +1,32 @@
-var fs = require('fs'),
-    PNG = require('pngjs').PNG,
-    easyimg = require('easyimage');
+// var chromakey = require('./chromakey');
+// chromakey.create(process.argv[2], process.argv[3], function(file){
+  
+//   console.log( 'FILE', file );
 
-easyimg.convert({
-    src : process.argv[2],
-    dst : 'in2.png'
-}).then(function(file){
-    mainOperation(file.path, 'out.png');
-}, function(err){
-    console.log('error convert', err);
-})
+  
+// }, function(err){
+//     console.log('failed');
+// });
 
+// console.log(new Date().getTime());
 
-function mainOperation(inf, outf) {
-    fs.createReadStream(inf)
-        .pipe(new PNG({
-            filterType: 4
-        }))
-        .on('parsed', function() {
-            var pixelSize = 4;
-            var row = [];
-            var alphaMap = initialAlphaMap();
-            for (var y = 0; y < this.height; y++) {
-                for (var x = 0; x < this.width; x++) {
-                    var idx = (this.width * y + x) << 2;
-                    var pixel = {
-                        r: this.data[idx],
-                        g: this.data[idx + 1],
-                        b: this.data[idx + 2],
-                        a: this.data[idx + 3]
-                    };
-                    var newPixel = operate(pixel, alphaMap);
-                    this.data[idx] = newPixel.r;
-                    this.data[idx + 1] = newPixel.g;
-                    this.data[idx + 2] = newPixel.b;
-                    this.data[idx + 3] = newPixel.a;
-                }
-            }
+// function puts(error, stdout, stderr) { 
+//     if( error )  console.log( error );
+//     //sys.puts(stdout) 
+// }
 
+/*
+image magic commands
 
-            this.pack().pipe(fs.createWriteStream(outf));
-        });
-}
+composite -geometry 300x250+370+510 butas.png bg.png intermediate.png
+composite fg.png intermediate.png output.png
 
-function initialAlphaMap() {
-    var alphaMapArray = [];
-    var fullyTransparentEndIndex = 35;
-    var semiTransparentEndIndex = 90;
-    for (var i = 0; i < 510; i++) {
-        if (i < fullyTransparentEndIndex) {
-            alphaMapArray.push(255);
-        } else if (i >= fullyTransparentEndIndex && i < semiTransparentEndIndex) {
-            var lengthOfSemis = semiTransparentEndIndex - fullyTransparentEndIndex;
-            var indexValue = i - fullyTransparentEndIndex;
-            var multiplier = 1 - (indexValue / lengthOfSemis);
-            var alphaValue = multiplier * 255.0;
-            alphaMapArray.push(alphaValue);
-        } else {
-            alphaMapArray.push(0);
-        }
-    }
-    return alphaMapArray;
-}
+    fs.unlinkSync(tmp + key + '.masked.png');
+Google Drive API KEY =   AIzaSyDrfuBAC8tiviDDU4uWaSTZNQ4c1iq8qL0
+*/
 
-
-function operate(pixel, alphaMap) {
-    var redValue = pixel.r;
-    var greenValue = pixel.g;
-    var blueValue = pixel.b;
-
-    if (greenValue > redValue && greenValue > blueValue)
-        pixel.a = alphaMap[(greenValue * 2) - redValue - blueValue];
-    else
-        pixel.a = 255;
-
-    return pixel;
-}
+// var path = require('path');
+// var low = require('lowdb')
+// var storage = require('lowdb/file-sync')
+// var db = low('db.json', { storage })
+// console.log(db('folders').find({name :'day'}));
