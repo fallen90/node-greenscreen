@@ -13,14 +13,15 @@
     "googleapis": "^3.1.0",
     "imagemagick-composite": "^0.1.2",
     "images": "^2.1.11",
+    "jade": "^1.11.0",
     "lowdb": "^0.12.5",
     "pngjs": "^2.2.0"
   },
-  "main": "index.js",
-  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "main": "app.js",
+  "devDependencies": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/fallen90/node-greenscreen.git"
