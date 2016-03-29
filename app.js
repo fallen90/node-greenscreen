@@ -8,6 +8,7 @@ var low = require('lowdb')
 var storage = require('lowdb/file-sync')
 var db = low('db.json', { storage });
 var gdrive = require('./gdrive');
+var http = require('http');
 
 var upload_dir = __dirname + '/public/uploads/';
 var output_dir = __dirname + '/public/outputs/';
@@ -20,12 +21,16 @@ app.use(busboy());
 
 // app.use(express.static(__dirname + '/public'));
 app.use('/lib', express.static(__dirname + '/public/lib'));
+
+
 app.get('/', function (req, res) {
   res.render('index', { title: 'Hey'});
 });
+
 app.get('/download', function (req, res) {
   res.render('download', { title: 'Hey'});
 });
+
 app.post('/file-upload', function(req, res) {
     var fstream;
     req.pipe(req.busboy);
@@ -55,8 +60,12 @@ app.post('/file-upload', function(req, res) {
     });
 });
 
-app.listen(app.get('port'), function() {
-  console.log('Node app is running on port', app.get('port'));
+app.set('port', process.env.OPENSHIFT_NODEJS_PORT || process.env.PORT || 3002);
+app.set('ip', process.env.OPENSHIFT_NODEJS_IP || "127.0.0.1");
+
+
+http.createServer(app).listen(app.get('port') ,app.get('ip'), function () {
+    console.log("✔ Express server listening at %s:%d ", app.get('ip'),app.get('port'));
 });
 
 var uploadFile = function(key) {
